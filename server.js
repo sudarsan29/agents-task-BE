@@ -14,10 +14,25 @@ mongoose.connection.on("error", (error) => {
     console.log("DB not connected", error);
 });
 
+// List of allowed origins
+const allowedOrigins = [
+  'https://agents-task-fe-git-main-sudarsans-projects-b49c7388.vercel.app',
+  'https://agents-task-fe.vercel.app', // if you have multiple frontends or preview URLs
+];
+
+// CORS setup with dynamic origin
 app.use(cors({
-  origin: "https://agents-task-fe.vercel.app", 
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  origin: function(origin, callback){
+    // allow requests with no origin (like mobile apps or curl requests)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  methods: ['GET','POST','PUT','DELETE'],
+  credentials: true,
 }));
 
 // Import models 
