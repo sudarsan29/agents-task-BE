@@ -17,22 +17,23 @@ mongoose.connection.on("error", (error) => {
 // List of allowed origins
 const allowedOrigins = [
   'https://agents-task-fe-git-main-sudarsans-projects-b49c7388.vercel.app',
-  'agents-task-k87t33325-sudarsans-projects-b49c7388.vercel.app',
   'https://agents-task-osk0j6uw5-sudarsans-projects-b49c7388.vercel.app/',
   'https://agents-task-fe.vercel.app', // if you have multiple frontends or preview URLs
 ];
 
 // CORS setup with dynamic origin
 const corsOptions = {
-  origin: function(origin, callback){
+  origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
   },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+  optionsSuccessStatus: 200, // For legacy browsers
 };
 
 
@@ -50,6 +51,7 @@ const taskRoutes = require('./routes/task_route');
 
 // Middleware
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json());
 
 // Use routes
