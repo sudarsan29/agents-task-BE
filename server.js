@@ -14,6 +14,11 @@ mongoose.connection.on("error", (error) => {
     console.log("DB not connected", error);
 });
 
+app.use(cors({
+  origin: "https://agents-task-fe.vercel.app",
+  credentials: true
+}));
+
 // Import models 
 require('./models/user_model');
 require('./models/agent_model');
