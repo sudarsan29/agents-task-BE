@@ -18,6 +18,7 @@ mongoose.connection.on("error", (error) => {
 const allowedOrigins = [
   'https://agents-task-fe-git-main-sudarsans-projects-b49c7388.vercel.app',
   'agents-task-k87t33325-sudarsans-projects-b49c7388.vercel.app',
+  'https://agents-task-osk0j6uw5-sudarsans-projects-b49c7388.vercel.app/',
   'https://agents-task-fe.vercel.app', // if you have multiple frontends or preview URLs
 ];
 
