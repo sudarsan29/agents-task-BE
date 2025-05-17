@@ -15,7 +15,8 @@ mongoose.connection.on("error", (error) => {
 });
 
 app.use(cors({
-  origin: "https://agents-task-fe.vercel.app",
+  origin: "https://agents-task-fe.vercel.app", 
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
