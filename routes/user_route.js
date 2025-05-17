@@ -15,7 +15,7 @@ router.post('/signup', (req, res) => {
     UserModel.findOne({email: email})
     .then((userInDB) => {
         if(userInDB){
-            return res.status(500).json({ error: "User with this email already existed"});
+            return res.status(409).json({ error: "User with this email already existed"});
         }
         bcryptjs.hash(password, 16)
         .then((hashedPassword) => {
@@ -31,7 +31,7 @@ router.post('/signup', (req, res) => {
     })
 })
 
-router.post('/login', protectedResource, (req,res) => {
+router.post('/login', (req,res) => {
     const {email, password} = req.body;
     if(!email || !password){
         return res.status(400).json({ error: "One or more fields are empty"});
