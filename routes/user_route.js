@@ -31,7 +31,7 @@ router.post('/signup', (req, res) => {
     })
 })
 
-router.post('/login', (req,res) => {
+router.post('/login', protectedResource, (req,res) => {
     const {email, password} = req.body;
     if(!email || !password){
         return res.status(400).json({ error: "One or more fields are empty"});
