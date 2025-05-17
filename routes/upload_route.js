@@ -29,7 +29,7 @@ router.post('/upload-csv', protectedResource, upload.single('file'), async (req,
             return res.status(400).json({ error: "5 Agents are required to distribute task" });
         }
 
-        FileSystem.createReadStream(req.file.path)
+        fs.createReadStream(req.file.path)
             .pipe(csv())
             .on('data', (data) => results.push(data))
             .on('end', async () => {
