@@ -55,10 +55,10 @@ app.options("*", cors(corsOptions));
 app.use(express.json());
 
 // Use routes
-app.use(uploadRoutes);
-app.use(userRoutes);
-app.use(agentRoutes);
-app.use(taskRoutes);
+app.use('/api/upload', uploadRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/agent', agentRoutes);
+app.use('/api/task', taskRoutes);
 
 // Start server
 const PORT = process.env.PORT || 4000;
